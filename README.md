@@ -1,0 +1,1 @@
+# -If an error is reported, the third party package of Node is not found in most cases. In the terminal, enter the app folder, execute NPM install, install the required package, and NPM start will run
