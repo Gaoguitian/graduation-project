@@ -1,0 +1,444 @@
+*{
+    margin: 0;
+    padding: 0;
+  }
+
+  canvas{
+    margin: 0;
+    padding: 0px 0px 0px 0px;
+    display: block; 
+    touch-action: none; 
+  }
+  .header{
+      width: 100%;
+      height: 80px;
+      background-color: white;
+      z-index: 99;
+      position: fixed;
+      top: 0px;
+      opacity: .9;
+      box-shadow:0 0 10px orange;
+  }
+  .headernav{
+      width: 1150px;
+      height: 80px;
+      margin: 0 auto;
+      box-sizing: border-box;
+      background-image: url(/images/logo.svg);
+      background-position: auto center;
+      background-repeat: no-repeat;
+      background-size: 80px 80px;
+  }
+  .navlist{
+      width: 1000px;
+      height: 80px;
+      margin-left: 110px;
+      display: flex;
+      justify-content: space-between;
+      align-items: center;
+      position: relative;
+  }
+  .navlist a{
+      text-decoration: none;
+      text-shadow: 0 0 20px black;
+      color: black;
+      transition: all .5s;
+  }
+  .navlist a:hover{
+      text-shadow: 0 0 20px orange;
+  }
+  .tankuang{
+    width: 100%;
+    height: 100%;
+    /* background-image: url(/images/man.png); */
+    background-repeat:repeat;
+    position: fixed;
+    top: 0px;
+    z-index: 99;
+    opacity: 1;
+    animation: donghua1 .3s ease-out
+    }
+@keyframes donghua1 {
+    from{
+        opacity: 0;
+        height:20%
+    }to{
+        opacity: 1;
+        height:100%
+    }
+}
+    .close{
+        position: absolute;
+        top: 30px;
+        left: 88%;
+        cursor: pointer;
+    }
+    .text{
+        border: 1px solid red;
+        width: 300px;
+        height: 40px;
+        border-radius: 5px;
+        outline: none;
+    }
+    .text:focus{
+        box-shadow:0px 5px 10px black;
+  }
+  .button{
+      width: 40px;
+      height: 40px;
+  }
+  .search{
+      position: absolute;
+      top: 40%;
+      left: 40%;
+  }
+  .sy{
+      color: red !important;;
+  }
+  .lunbotu{
+      width: 100%;
+      height: 500px;
+      position: absolute;
+      top: 90px;
+  }
+  .lunbotupic{
+      width: 1150px;
+      height: 500px;
+      margin: 0 auto;
+      position: relative;
+      border-radius: 10px;
+      overflow: hidden;
+  }
+  .lunbotupic img{
+      width: 1150px;
+      height: 500px;
+      position: absolute;
+      top: 0px;
+      left: 0px;
+  }
+  .shang{
+      width: 30px;
+      height: 50px;
+      background-color: white;
+      position: absolute;
+      top: 220px;
+      left: 0px;
+      opacity: .7;
+      cursor: pointer;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+  }
+  .xia{
+      width: 30px;
+      height: 50px;
+      background-color:white;
+      position: absolute;
+      top: 220px;
+      left: 1120px;
+      z-index: 99;
+      opacity: .7;
+      cursor: pointer;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+  }
+  .imgitem{
+      opacity: 0;
+      transition: all .5s;
+  }
+  .imgitem.active{
+      width: 1150px;
+      height: 500px;
+      position: absolute;
+      top: 0px;
+      left: 0px;
+      opacity: 1;
+  }
+  .circle{
+      width: 100px;
+      height: 20px;
+      display: flex;
+      justify-content: flex-end;
+      position: absolute;
+      top: 470px;
+      left: 1000px;
+  }
+  .circleDiv{
+      width: 10px;
+      height: 10px;
+      border-radius: 5px;
+      border:1px solid black;
+      margin-left: 5px;
+      cursor: pointer;
+  }
+  .circle .active{
+      background-color: white;
+  }
+  .pic{
+      cursor: pointer;
+  }
+  .logins{
+    width:120px;
+    height:30px;
+    display: inline-block;
+    text-align: center;
+    line-height: 30px;
+    font-size: 12px;
+    color: black;
+}
+.logins1{
+    width:120px;
+    height:30px;
+    display: inline-block;
+    text-align: center;
+    line-height: 30px;
+    font-size: 12px;
+    color: black;
+}
+.exit{
+    width:100px;
+    height:30px;
+    display: none;
+    text-align: center;
+    line-height: 30px;
+}
+.a{
+    position: relative;
+    width: 1150px;
+    height: 700px;
+    top:0px;
+    overflow: hidden;
+    margin:0 auto;
+}
+.b{
+    position: absolute;
+    width: 400px;
+    height: 600px;
+    left: 0;
+    margin: 70px 5px;
+    transition: 1s;
+}
+.b a{
+    text-decoration: none;
+    color: orange;
+    font: 900 28px '';
+}
+.b h2{
+    /* 鼠标放开时的动画，第一个值是动画的过渡时间
+    第二个值是延迟一秒后执行动画 */
+    transition: .5s 1s;
+    opacity: 0;
+    color: rgb(30,210,200);
+}
+.b span{
+    transition: .5s 1s;
+    color: orangered;
+    font: 500 15px '';
+    position: absolute;
+    top: 70px;
+}
+.c{
+    position: absolute;
+    top: -130px;
+    right: -240px;
+}
+.d,.e{
+    position: absolute;
+    right: calc(var(--i)*100px);
+    width: calc(var(--w)*40px);
+    height: 500px;
+    overflow: hidden;
+    border-radius: 100px;
+    transform: rotateZ(220deg) translate(0,0);
+    background: rgb(240,220,150);
+    transition: .5s .5s;
+}
+.d:nth-child(2){
+    background: rgb(240,190,230);
+}
+.e{
+    left: -470px;
+    top: -140px;
+    width: 70px;
+    background-color: rgb(90,220,150);
+}
+.a:hover .c div{
+    /* 设置延迟动画 */
+    transition: .5s calc(var(--i)*.1s);
+    /* 移动的轨迹 */
+    transform: rotateZ(220deg) translate(-200px,400px);
+}
+.a:hover .b{
+    transition: 1s .5s;
+    left: 620px;
+}
+.a:hover .b span{
+    transition: 1s .5s;
+    top: 105px;
+}
+.a:hover .b h2{
+    transition: 1s .5s;
+    opacity: 1;
+}
+.f{
+    width: 350px;
+    height: 420px;
+    position: absolute;
+    background-image: url("/images/erweima.jpg");
+    background-size: 350px auto;
+    background-size: cover;
+    margin-left: 150px;
+    margin-top: 80px;
+    opacity: 0;
+    transition: .5s;
+}
+.a:hover .f{
+    transition: 1s 1.3s;
+    opacity: 1;
+}
+  /* .recommendDiv{
+    width: 100%;
+    height: 500px;
+    position: absolute;
+    top: 500px;
+    z-index: 99;
+}
+.recommend{
+    width: 1150px;
+    height: 500px;
+    margin: 0 auto;
+}
+.recommendDiv .recommend h2{
+    color: transparent;
+    position: relative;
+}
+.recommendDiv .recommend .size1::after{
+    content: 'classical literature';
+    color: transparent;
+    position: absolute;
+    top: 0px;
+    left: 0px;
+    background: -webkit-linear-gradient(left,yellow,blue,#192a56,#00d2d3,#6d214f,#2e86de);
+    background-clip: text;
+    -webkit-background-clip: text;
+    clip-path: circle(30px at 0% 50%);
+    animation: donghua 2s infinite;
+}
+@keyframes donghua{
+    from{
+        clip-path: circle(30px at 0% 50%);
+    }
+    to{
+        clip-path: circle(300px at 100% 50%);
+    }
+}
+.size::after{
+    content: 'Programmer‘s must';
+    color: transparent;
+    position: absolute;
+    top: 0px;
+    left: 0px;
+    background: -webkit-linear-gradient(left,yellow,blue,#192a56,#00d2d3,#6d214f,#2e86de);
+    background-clip: text;
+    -webkit-background-clip: text;
+    clip-path: circle(30px at 0% 50%);
+    animation: donghua1 2s infinite;
+}
+@keyframes donghua1{
+    from{
+        clip-path: circle(30px at 0% 50%);
+    }
+    to{
+        clip-path: circle(30px at 100% 50%);
+    }
+}
+.onebooksDiv{
+    width: 1150px;
+    height: 205px;
+    display: flex;
+    flex-wrap: wrap;
+    background-color: white;
+    padding-left: 3px;
+    border-radius: 5px;
+}
+.onebook{
+    width: 138px;
+    height: 205px;
+    margin-left: 5px;
+
+}
+.onebook img{
+    width: 80%;
+    height: 170px;
+    border-radius: 5px;
+    margin-left: 11px;
+    margin-top: 10px;
+}
+.onebook p{
+    font-size: 1px;
+    text-align: center;
+}
+.onebooksDiv a{
+    text-decoration: none;
+    color: black;
+    border-radius: 5px;
+    display: block;
+    transition: all .5s;
+}
+.onebooksDiv a:hover{
+    box-shadow: 0px 5px 20px black;
+}
+.textshenglve{
+    white-space: nowrap;
+    overflow: hidden;
+    text-overflow: ellipsis;
+} */
+.size1{
+    margin-top: 600px;
+    position: relative;
+    color:transparent;
+    margin-left:550px;
+}
+.size1::after{
+    content: '最近热门';
+    position: absolute;
+    top: 0px;
+    left: 0px;
+    background: linear-gradient(left,yellow,orange,#192a56,#00d2d3,#6d214f,#2e86de);
+    background: -webkit-linear-gradient(left,yellow,orange,#192a56,#00d2d3,#6d214f,#2e86de);
+    background-clip: text;
+    -webkit-background-clip: text;
+    /* animation: donghua 1s infinite; */
+}
+/* @keyframes donghua{
+    from{
+        background: linear-gradient(left,yellow,orange,#192a56,#00d2d3,#6d214f,#2e86de);
+        background: -webkit-linear-gradient(left,yellow,orange,#192a56,#00d2d3,#6d214f,#2e86de);
+    }
+    to{
+        background: linear-gradient(left,red,DeepPink,#00d2d3,Gold ,Fuchsia ,Green );
+        background: -webkit-linear-gradient(left,red,DeepPink,#00d2d3,Gold ,Fuchsia ,Green );
+    }
+} */
+.zhezhao{
+    width: 100px;
+    height: 60px;
+    position: absolute;
+    top: 75px;
+    left: 900px;
+    z-index: 99;
+    opacity: 0.8;
+    background:white;
+    animation: donghua 1s ease-out;
+    font-size: 14px;
+}
+@keyframes donghua {
+    from{
+        height:0px;
+        opacity: 0;
+    }to{
+        height:60px;
+        opacity: 1;
+    }
+}  

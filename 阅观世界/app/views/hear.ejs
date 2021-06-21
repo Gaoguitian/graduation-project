@@ -1,0 +1,16 @@
+<div class="header">
+    <div class="headernav">
+        <div class="navlist">
+            <a href="/">首页推荐</a>
+            <%for(let i=0;i<sorts.length;i++){%>
+            <a <% if(cid ==(i+1)){ %> class="active" <%}%>  href="/c/<%=sorts[i].id%>/page/1"><%=sorts[i].sort%></a>
+            <%}%>
+            <img src="/images/sousuo.svg" class="pic">
+            <%if (userInfo){%>
+                <div class="logins"> <span class="message" ><span style="width:40px;height:30px;display:inline-block;vertical-align: middle;"></span></span><img src='<%=userInfo[0].headimg%>' style='width: 30px;height: 30px;vertical-align: middle;border-radius:15px' title = '<%=userInfo[0].username%>'/></span class='exit'> </span class='exit'> <img src="/images/xiangxia.svg" style="vertical-align: middle;"></div>
+            <%}else{%>
+                <div class="logins1"><span><a href="/login">登录</a> </span>|<span><a href="/login">注册</a> </span></div>
+                <%}%>
+        </div>
+    </div>
+</div>

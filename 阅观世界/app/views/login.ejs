@@ -1,0 +1,210 @@
+
+<!DOCTYPE html>
+<html lang="en" >
+<head>
+<meta charset="UTF-8">
+<title>注册/登录</title>
+<link rel="stylesheet" href="stylesheets/style.css">
+<style>
+	.button{
+		width:80px;
+		height:30px;
+		border-radius: 5px;
+		position: absolute;
+		left:10px;
+		top: 15px;
+		outline:none;
+		border:0;
+		text-align:center;
+		line-height: 30px;
+	}
+</style>
+</head>
+<body>
+<button class="button">返回</button>
+<div class="container right-panel-active">
+    <div class="reg"></div>
+	<!-- Sign Up -->
+	<div class="container__form container--signup">
+		<form  class="form" action="" method="POST" id="form1">
+			<h2 class="form__title">注册</h2>
+			<input type="username" name="username" placeholder="用户名" class="input" id="username"/>
+			<input type="email" name="email" placeholder="邮箱" class="input" id="email"/>
+			<input type="password" name="password" placeholder="密码" class="input" id='password'/>
+			<button class="btn" type="button">注册</button>
+		</form>
+	</div>
+
+	<!-- Sign In -->
+	<div class="container__form container--signin">
+		<form action="/login" method="post" class="form" id="form2">
+			<h2 class="form__title">登录</h2>
+			<input type="email" name="email" placeholder="邮箱" class="input" id='email1'/>
+			<input type="password" name="password"  placeholder="密码" class="input" id="password2"/>
+			<a href="#" class="link">忘记密码?</a>
+			<button class="btn  btn3" type="button">登录</button>
+		</form>
+	</div>
+
+	<!-- Overlay -->
+	<div class="container__overlay">
+		<div class="overlay">
+			<div class="overlay__panel overlay--left">
+				<button class="btn" id="signIn">登录</button>
+			</div>
+			<div class="overlay__panel overlay--right">
+				<button class="btn" id="signUp">注册</button>
+			</div>
+		</div>
+	</div>
+</div>
+<script>
+	var btn = document.querySelector('button')
+	btn.onclick = function() {
+		history.back();
+	}
+</script>
+<script  src="javascripts/script.js"></script>
+<script>
+	var usernamebtn = document.querySelector('#username');
+	var email = document.querySelector('#email');
+	var password = document.querySelector('#password')
+	var classreg = document.querySelector('.reg');
+	var btn = document.querySelector('.btn')
+	usernamebtn.oninput = function() {
+		classreg.innerHTML =''
+	if(0<usernamebtn.value.length&&usernamebtn.value.length<=4){
+		//创建ajax请求
+	var xhr = new XMLHttpRequest();
+	//请求地址
+    xhr.open('get','/register1/'+usernamebtn.value)
+	//发送请求
+	xhr.send();
+	//监听请求
+	xhr.onload = function() {
+		if(xhr.responseText == '名称可以使用'){
+            classreg.innerHTML = xhr.responseText
+			email.disabled = false;
+			email.style.backgroundColor = 'white';
+			password.style.backgroundColor = 'white';
+			password.disabled = false
+            btn.disabled = false
+		}else{
+			classreg.innerHTML = xhr.responseText
+			email.disabled = true;
+			email.style.backgroundColor = '	Gainsboro';
+			password.disabled = true
+			password.style.backgroundColor = '	Gainsboro';
+			btn.disabled = true
+		}
+		
+	}
+	}else{
+		classreg.innerHTML = '用户名不规范'
+		email.disabled = true;
+		email.style.backgroundColor = '	Gainsboro';
+		password.disabled = true
+		password.style.backgroundColor = '	Gainsboro';
+		btn.disabled = true
+	}
+	
+	}
+	email.oninput = function(){
+		var reg = /^\d{5,12}@[qQ][qQ]\.(com|cn)$/
+		var result = reg.test(email.value)
+        classreg.innerHTML =''
+		console.log(result)
+		if(result == true){
+			//创建ajax请求
+			var xhr = new XMLHttpRequest();
+	        //请求地址
+            xhr.open('get','/register2/'+email.value)
+	        //发送请求
+	        xhr.send();
+	          //监听请求
+	        xhr.onload = function() {
+		    if(xhr.responseText == '邮箱存在'){
+				classreg.innerHTML = xhr.responseText
+				password.disabled = true
+				password.style.backgroundColor = '	Gainsboro';
+			    btn.disabled = true
+			}else{
+				classreg.innerHTML = xhr.responseText
+				password.style.backgroundColor = 'white';
+				password.disabled = false
+			    btn.disabled = false
+			}
+    	}
+		}else{
+			classreg.innerHTML ='邮箱格式不正确'
+			password.disabled = true
+			password.style.backgroundColor = '	Gainsboro';
+			btn.disabled = true
+		}
+		}
+        password.oninput = function(){
+			console.log(password.value.length)
+			if(password.value.length<=6){
+				btn.disabled = true
+				classreg.innerHTML ='密码安全性低，请重新输入'
+			}else{
+				classreg.innerHTML =''
+				btn.disabled = false
+			}
+		}
+	btn.onclick = function(){
+		var xhr = new XMLHttpRequest();
+		var username = usernamebtn.value;
+		var email1 = email.value
+		var password1 = password.value;
+		var params = 'username=' + username + '&email=' + email1 + '&password=' + password1
+		xhr.open('post','/register');
+		xhr.setRequestHeader('Content-Type','application/x-www-form-urlencoded')
+		xhr.send(params)
+		xhr.onload = function(){
+			alert(xhr.responseText)
+			usernamebtn.value = ''
+			password.value = ''
+			email.value = ''
+			container.classList.remove("right-panel-active");
+		}
+	}
+	let email1 = document.querySelector('#email1')
+	let password2 = document.querySelector('#password2')
+	let btn3 = document.querySelector('.btn3')
+	console.log(btn3)
+	btn3.onclick = function(){
+		console.log(email1.value)
+		let reg = /^\d{5,12}@[qQ][qQ]\.(com|cn)$/
+		let result = reg.test(email1.value)
+		console.log( result)
+		if(result == true){
+            let xhr = new XMLHttpRequest();
+		let username = usernamebtn.value;
+		let email11 = email1.value
+		let password22 = password2.value;
+		let params = 'email=' + email11 + '&password=' + password22
+		console.log(params)
+		xhr.open('post','/login');
+		xhr.setRequestHeader('Content-Type','application/x-www-form-urlencoded')
+		xhr.send(params)
+		xhr.onload = function(){
+			alert(xhr.responseText)
+			if(xhr.responseText == '登录成功'){
+				usernamebtn.value = ''
+			password22.value = ''
+			email11.value = ''
+			location.href = '/'
+			}
+		}
+		}
+
+	    else{
+            alert('邮箱格式不正确')
+	}
+}
+</script>
+
+
+</body>
+</html>

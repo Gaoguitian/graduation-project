@@ -1,0 +1,144 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta http-equiv="X-UA-Compatible" content="IE=edge">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>阅观世界</title>
+  <link rel="stylesheet" href="/stylesheets/bookindexcss.css">
+  <!-- <link rel="stylesheet" type="text/css" href="/stylesheets/normalize.css" />CSS RESET -->
+	<link rel="stylesheet" href="/stylesheets/style3.css">
+</head>
+<body>
+  <div class="header">
+		<div class="headernav">
+			<div class="navlist">
+				<a href="/" class="sy">首页推荐</a>
+				<%for(let i=0;i<sorts.length;i++){%>
+				<a href="/c/<%=sorts[i].id%>/page/1"><%=sorts[i].sort%></a>
+				<%}%>
+				<img src="/images/sousuo.svg" class="pic">
+        <%if (userInfo){%>
+					<div class="logins"> <span class="message" ><span style="width:40px;height:30px;display:inline-block;vertical-align: middle;"></span></span><img src='<%=userInfo[0].headimg%>' style='width: 30px;height: 30px;vertical-align: middle;border-radius:15px' title = '<%=userInfo[0].username%>'/></span class='exit'> </span class='exit'> <img src="/images/xiangxia.svg" style="vertical-align: middle;"></div>
+				<%}else{%>
+					<div class="logins1"><span><a href="/login">登录</a> </span>|<span><a href="/login">注册</a> </span></div>
+					<%}%>
+			</div>
+		</div>
+		</div>
+	</div>
+
+  <div class="lunbotu">
+    <div class="lunbotupic">
+          <img src="/images/shujia.jpg" class="imgitem active">
+    <img src="/images/shujia-004.jpg" class="imgitem">
+    <img src="/images/shuji-001.jpg" class="imgitem">
+    <img src="/images/shuji.jpg" class="imgitem">
+    <div class="btn">&nbsp;<</div>
+      <div class='btn1'> &nbsp;> </div>
+
+    <div class="circle">
+      <div class="circleDiv active" id="c0"></div>
+      <div class="circleDiv" id="c1"></div>
+      <div class="circleDiv" id="c2"></div>
+      <div class="circleDiv" id="c3"></div>
+    </div>
+</div>
+</div>
+
+<div style="height: auto;width: 1200px;margin:0 auto;text-align:center">
+  <h2 class="size1">最近热门</h2>
+</div>
+
+<div class="htmleaf-container">
+  <div class="htmleaf-content">
+    <section class="main">
+      <div class="wrap wrap--1">
+        <div class="container container--1">
+          <p>01.经典著作</p>
+        </div>
+      </div>
+
+      <div class="wrap wrap--2">
+        <div class="container container--2" style="background-image: url(https://img1.doubanio.com/lpic/s30019328.jpg);">
+          <p>02.下载最多</p>
+        </div>
+      </div>
+
+      <div class="wrap wrap--3">
+        <div class="container container--3"style="background-image: url(https://img3.doubanio.com/lpic/s33298990.jpg);">
+          <p>03.最受欢迎</p>
+        </div>
+      </div>
+    </section>
+  </div>
+</div>
+<div class="a">
+  <div class="b">
+      <a href="#">姓名：高贵田</a>
+      <h2>学号：1704070105</h2>
+      <span>这是一个基于express框架开发的网站，</br>我使用的是ejs模版，<br/>联合mysql数据库，<br/>将node爬虫爬取的数据渲染至页面</span>
+  </div>
+  <div class="c">
+      <!-- --i是用来计算平面圆柱的动效延迟和距离的
+      --w则是用来计算平面圆柱的宽度 -->
+      <div class="d" style="--i:1;--w:1.5"></div>
+      <div class="d" style="--i:2;--w:1.6"></div>
+      <div class="d" style="--i:3;--w:1.4"></div>
+      <div class="d" style="--i:4;--w:1.7"></div>
+      <div class="e" style="--i:1"></div>
+  </div>
+  
+  
+  <div class="f"></div>
+</div>
+<script>
+    let body = document.body;
+		let localstorage = window.localStorage
+		if(localstorage.getItem('flag')){
+			var flag = localstorage.getItem('flag');
+			console.log(flag);
+			if(flag==0){
+				body.style.backgroundImage = 'url(/images/909.gif)'
+			}
+			if(flag==1){
+            body.style.backgroundImage = 'url(/images/wenliku.com-679-plaid.jpg)'
+		}
+		if(flag == 2){
+			body.style.backgroundImage = 'url(/images/2.png)'
+		}
+		if(flag == 3){
+			body.style.backgroundImage = 'url(/images/3.gif)'
+		}
+		}else{
+			var flag = 0;
+			body.style.backgroundImage = 'url(/images/909.gif)'
+		}
+		// let btn = document.querySelector('.btn');
+    //     btn.onclick = function(){
+		// flag++;
+		// if(flag==1){
+    //         body.style.backgroundImage = 'url(/images/wenliku.com-679-plaid.jpg)'
+		// }
+		// if(flag == 2){
+		// 	body.style.backgroundImage = 'url(/images/2.png)'
+		// }
+		// if(flag == 3){
+		// 	body.style.backgroundImage = 'url(/images/3.gif)'
+		// }
+    //     if(flag == 4){
+		// 	flag=0
+		// 	body.style.backgroundImage = 'url(/images/909.gif)'
+		// }
+		// if(localstorage){
+		// 	localstorage.removeItem('flag')
+		// }
+		// localstorage.setItem('flag',flag)
+    //     }
+</script>
+<script src="/javascripts/loginmes.js"></script>
+<script src="/javascripts/sousuotankuang.js"></script>
+<script src="/javascripts/luobotu.js"></script>
+<script  src="/javascripts/script3.js"></script>
+</body>
+</html>

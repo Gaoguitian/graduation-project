@@ -1,0 +1,369 @@
+<!DOCTYPE html>
+<html lang="zh">
+<head>
+	<meta charset="UTF-8">
+	<meta http-equiv="X-UA-Compatible" content="IE=edge,chrome=1"> 
+	<meta name="viewport" content="width=device-width, initial-scale=1.0">
+	<title>阅观世界-分类</title>
+	<link rel="stylesheet" href="/stylesheets/style1.css">
+	<!-- <link rel="stylesheet" type="text/css" href="/stylesheets/htmleaf-demo.css" />CSS RESET -->
+	<!-- <link rel="stylesheet" type="text/css" href="/stylesheets/normalize.css">演示页面样式，使用时可以不引用 -->
+	<style>
+		*{
+		  margin: 0;
+		  padding: 0;
+		  font-family: 'Nunito', sans-serif;
+		 
+		}
+		canvas{
+		  margin: 0;
+		  padding: 0px 0px 0px 0px;
+		  display: block; 
+		  touch-action: none; 
+		}
+		.header{
+			width: 100%;
+			height: 80px;
+			background-color: white;
+			z-index: 99;
+			position: fixed;
+			top: 0px;
+			opacity: .9;
+			box-shadow:0 0 10px orange;
+		}
+		.headernav{
+			width: 1150px;
+			height: 80px;
+			margin: 0 auto;
+			box-sizing: border-box;
+			background-image: url(/images/logo.svg);
+			background-position: auto center;
+			background-repeat: no-repeat;
+			background-size: 80px 80px;
+		}
+		.navlist{
+			width: 1000px;
+			height: 80px;
+			margin-left: 100px;
+			display: flex;
+			justify-content: space-between;
+			align-items: center;
+			position: relative;
+		}
+		.navlist a{
+			text-decoration: none;
+			text-shadow: 0 0 20px black;
+			color: black;
+			transition: all .5s;
+		}
+		.navlist a:hover{
+			text-shadow: 0 0 20px orange;
+		}
+		.content{
+			width: 100%;
+			height: auto;
+			margin: 0 auto;
+			position: absolute;
+			top: 80px;
+			z-index: 98;
+		}
+		.booklist{
+			width: 1300px;
+            height: auto;
+			margin: 0 auto;
+			display: flex;
+			flex-wrap: wrap;
+			background-color: white;
+		}
+		.booklist a{
+			display: block;
+			border-radius: 5px!important;
+			margin-left: 2px;
+		}
+		.bookname{
+			margin: 15px 15px 5px 15px;
+			width: 150px;
+			height: 230px;
+			opacity: .8;
+			border: 1px solid #ccc;
+			border-radius: 2px;
+		}
+		.bookname img{
+			width: 90%;
+			height: 200px;
+			border-radius: 5px;
+			margin-left: 7px;
+			transition: all 0.5s;
+			margin-top: 5px;
+		}
+		.bookname p{
+			font-size: 1px;
+			text-align: center;
+		}
+    .booklist a{
+      text-decoration: none;
+      color: black;
+	  transition: all 0.5s;
+    }
+	.booklist a:hover{
+	  box-shadow: 0px 5px 10px black;
+	}
+	.booklist a:hover>.bookname>img{
+		    width: 90%;
+			height: 205px;
+			border-radius: 5px;
+			margin-left: 5px;
+	}
+	.fenpage{
+		width: 300px;
+		height: 30px;
+		margin: 0 auto;
+	}
+	.fenpage .pageBtns a{
+		text-decoration: none;
+		color: gray;
+		transition: all 0.5s;
+		border: 1px solid gray;
+		width: 20px;
+		height: 20px;
+		display: inline-block;
+		font-size: 12px;
+		text-align: center;
+		line-height: 20px;
+		border-radius: 2px;
+		background-color: skyblue;
+	}
+	.fenpage .pageBtns a:hover{
+		text-shadow:0px 0px 5px orange;
+	}
+	.fenpage .pageBtns a:active{
+		color: black;
+	}
+	.pageBtns{
+		display: inline-block;
+	}
+	.allConut{
+		display: inline-block;
+	}
+	.tankuang{
+		width: 100%;
+		height: 100%;
+		/* background-image: url(/images/man.png); */
+		background-repeat:repeat;
+		position: fixed;
+		top: 0px;
+		z-index: 99;
+		opacity: 1;
+		animation: donghua1 .3s ease-out
+		}
+	@keyframes donghua1 {
+		from{
+			opacity: 0;
+			height:20%
+		}to{
+            opacity: 1;
+			height:100%
+		}
+		
+	
+	}
+	.close{
+		position: absolute;
+		top: 30px;
+		left: 88%;
+		cursor: pointer;
+		}
+	.text{
+		border: 1px solid red;
+		width: 300px;
+		height: 40px;
+		border-radius: 5px;
+		outline: none;
+	}
+	.text:focus{
+        box-shadow:0px 5px 10px black;
+	}
+	.button{
+		width: 40px;
+		height: 40px;
+	}
+	.search{
+		position: relative;
+		top: 40%;
+		left: 40%;
+	}
+    .active{
+		color: red!important;;
+	}
+	.textshenglve{
+			white-space: nowrap;
+            overflow: hidden;
+            text-overflow: ellipsis;
+		}
+		.pic{
+			cursor: pointer;
+		}
+		.bookinfoDiv{
+			width: 100%;
+			height: 100%;
+			background: white;
+			opacity: 0.9;
+		}
+		.logins{
+            width:120px;
+            height:30px;
+            display: inline-block;
+            text-align: center;
+            line-height: 30px;
+			font-size: 12px;
+        }
+		.logins1{
+            width:120px;
+            height:30px;
+            display: inline-block;
+            text-align: center;
+            line-height: 30px;
+			font-size: 12px;
+        }
+        .exit{
+            width:100px;
+            height:30px;
+            display: none;
+            text-align: center;
+            line-height: 30px;
+        }
+		.zhezhao{
+			width: 100px;
+			height: 60px;
+			position: absolute;
+			top: 75px;
+			left: 900px;
+			z-index: 99;
+			background: white;
+			opacity: .8;
+			animation: donghua 1s ease-out;
+		}
+		@keyframes donghua {
+    from{
+        height:0px;
+        opacity: 0;
+    }to{
+        height:60px;
+        opacity: 1;
+    }
+} 
+	</style>
+</head>
+<body>
+	<canvas></canvas>
+	<% include ./hear.ejs %>
+	<div class="content">
+		<h3 style='display:inline-block'><%-result2[0].sort%>-第<%-page%>页-</h3>
+		<button class="btn" style="display:inline-block;border:0;background-color: transparent;outline:none;position:absolute;top: 20;left: 98%;"><img src="/images/huanfu.svg" style="margin-top: 5px;"/></button>
+	   <hr>
+		<div class="booklist">
+      <% for(let i=0;i<books.length;i++){ %>
+      <a href="/books/<%-books[i].id%>">
+        <div class="bookname">
+          <img src="<%-books[i].bookimg%>" >
+          <p class="textshenglve"><%-books[i].bookname%></p>
+        </div>
+      </a>
+	  <script>
+		var xuanfu = document.querySelectorAll('.booklist')
+		console.log(xuanfu)
+		var body = document.querySelector('body')
+		xuanfu.onmouseover = function(){
+      
+      var black = document.createElement('div')
+      black.className = "tankuang1"
+      black.innerHTML=`
+      <div class='tankuang'>
+      <img src="/images/close.svg" class="close">
+      <div class="search">
+      <input type="text" class="text">
+      <button class="button">查询</button>
+      </div>
+ 
+      </div>
+      `
+	 body.appendChild(black)}
+	</script>
+    <%}%>
+		</div>
+		
+		<div class="fenpage">
+			<div class="pageBtns">
+				<% if(page>1){ %>
+					<a href="/c/<%=cid%>/page/<%=(page-1)%>"><</a>
+				<% } %>
+
+				<% for(let i = startPage;i<=endPage;i++){ %>
+					<a <% if(page==i){ %> class="active" <%}%>  href="/c/<%=cid%>/page/<%=i%>"><%=i%></a>
+
+				<%}%>
+
+				<% if(page<pageAll){ %>
+					<a href="/c/<%=cid%>/page/<%=(page+1)%>">></a>
+				<% } %>
+			</div>
+			<div class="allConut">共<%=pageAll%>页</div>
+		</div>
+	</div>
+	<script src="/javascripts/script1.js"></script>
+	<script>
+		let localstorage = window.localStorage
+		if(localstorage.getItem("flag")){
+			var flag = localstorage.getItem('flag');
+			console.log(flag);
+			if(flag==0){
+				body.style.backgroundImage = ''
+				canvas.height = 1030
+			}
+			if(flag==1){
+            body.style.backgroundImage = 'url(/images/wenliku.com-679-plaid.jpg)'
+		    canvas.height = 0
+		}
+		if(flag == 2){
+			body.style.backgroundImage = 'url(/images/2.png)'
+		    canvas.height = 0
+		}
+		if(flag == 3){
+			body.style.backgroundImage = 'url(/images/3.gif)'
+		    canvas.height = 0
+		}
+		}else{
+			var flag = 0
+		}
+		let btn = document.querySelector('.btn');
+        btn.onclick = function(){
+		flag++;
+		if(flag==1){
+            body.style.backgroundImage = 'url(/images/wenliku.com-679-plaid.jpg)'
+		    canvas.height = 0
+		}
+		if(flag == 2){
+			body.style.backgroundImage = 'url(/images/2.png)'
+		    canvas.height = 0
+		}
+		if(flag == 3){
+			body.style.backgroundImage = 'url(/images/3.gif)'
+		    canvas.height = 0
+		}
+        if(flag == 4){
+			flag=0
+			body.style.backgroundImage = ''
+		    canvas.height = 1030
+		}
+		if(localstorage){
+			localstorage.removeItem('flag')
+		}
+		localstorage.setItem('flag',flag)
+        }
+	</script>
+	<script src="/javascripts/loginmes.js"></script>
+	<script src="/javascripts/sousuotankuang.js"></script>
+	<!-- <script src="/javascripts/background.js"></script> -->
+	<!-- <script src="stopExecutionOnTimeout.js" type="text/javascript" charset="utf-8"></script> -->
+</body>
+</html>

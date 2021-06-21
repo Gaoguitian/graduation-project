@@ -1,0 +1,392 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <meta charset="utf-8">
+    <title>后台管理页面</title>
+    <!-- 引入 echarts.js -->
+    <script src="https://cdn.bootcss.com/echarts/4.2.1-rc1/echarts.min.js"></script>
+    <style>
+        .title{
+            width:100%;
+            height:80px;
+            border-bottom: 1px dotted #ccc;
+        }
+        img{
+            width:auto;
+            height: 80px;
+        }
+        .container{
+            position: absolute;
+            top: 90px;
+            left: 0;
+            background-color: gray;
+            width:20%;
+            height:100%;
+            color:white;
+        }
+        .bookmes{
+            width:100%;
+            height:60px;
+            text-align:center;
+            line-height:60px;
+            border-bottom: 1px solid white;
+        }
+        .usermes{
+            width:100%;
+            height:60px;
+            text-align:center;
+            line-height:60px;
+            border-bottom: 1px solid white;
+        }
+        .usercontrol{
+            width:100%;
+            height:60px;
+            text-align:center;
+            line-height:60px;
+            border-bottom: 1px solid white;
+        }
+        .bookpub{
+            width:100%;
+            height:60px;
+            text-align:center;
+            line-height:60px;
+            border-bottom: 1px solid white;
+        }
+        .message{
+            width:100%;
+            height:800px;
+        }
+    </style>
+</head>
+<body>
+    <div class="title"><img src="/images/uugai.com_1620639377183.png" alt="" srcset=""></div>
+    <div class="container">
+        <div class="bookmes">网站数据表</div>
+        <div class="usermes">个人信息</div>
+        <div class="usercontrol">用户管理</div>
+        <div class="bookpub">书籍发布</div>
+    </div>
+    <!-- 为ECharts准备一个具备大小（宽高）的Dom -->
+    <div id="main" style="width: 65%;height:700px;margin-left: 25%;"></div>
+   <script type="text/javascript">
+        // 基于准备好的dom，初始化echarts实例
+       function fn(){ var myChart = echarts.init(document.getElementById('main'));
+
+        // 指定图表的配置项和数据
+        option = {
+    xAxis: {
+        type: 'category',
+        data: ['历史传记', '经济管理', '小说文学', '励志成功', '人文社科', '生活时尚', '学习教育','英文原版']
+    },
+    yAxis: {
+        type: 'value'
+    },
+    series: [{
+        data: ['<%=result1.length%>', '<%=result2.length%>', '<%=result3.length%>', '<%=result4.length%>', '<%=result5.length%>', '<%=result6.length%>', '<%=result7.length%>','<%=result8.length%>'],
+        type: 'bar'
+    }]
+};
+
+        // 使用刚指定的配置项和数据显示图表。
+        myChart.setOption(option);}
+        fn()
+        var body = document.body;
+        var bookmes = document.querySelector('.bookmes')
+        bookmes.style.backgroundColor = '#c04851'
+        bookmes.style.cursor = 'pointer'
+        var usermes = document.querySelector('.usermes')
+        usermes.style.cursor = 'pointer'
+        var usercontrol = document.querySelector('.usercontrol')
+        usercontrol.style.cursor= 'pointer'
+        var bookpub = document.querySelector('.bookpub')
+        bookpub.style.cursor = 'pointer'
+        var div =document.querySelectorAll('div');
+        console.log(div)
+        bookmes.onclick = function(){
+            var div =document.querySelectorAll('div');
+            body.removeChild(div[6]);
+            var bookmes1 = document.createElement("div");
+            bookmes1.setAttribute('id','main')
+            bookmes1.style.width = '65%'
+            bookmes1.style.height = '700px'
+            bookmes1.style.marginLeft = '25%'
+            body.appendChild(bookmes1);
+            fn()
+            bookmes.style.backgroundColor = '#c04851'
+            usermes.style.backgroundColor = 'gray'
+            usercontrol.style.backgroundColor ='gray'
+            bookpub.style.backgroundColor ='gray'
+        }
+        let userinfo;
+        let headimg111;
+        let password111
+        usermes.onclick = function(){
+            console.log(headimg111)
+            var xhr = new XMLHttpRequest();
+            xhr.open('GET','/userxinxi/'+'<%-userInfo[0].email%>')
+            xhr.send()
+            xhr.onload = function(){
+            console.log(JSON.parse(xhr.responseText)[0])
+            userinfo = JSON.parse(xhr.responseText)[0].username
+            headimg111 = JSON.parse(xhr.responseText)[0].headimg
+            password111 = JSON.parse(xhr.responseText)[0].password
+            console.log(userinfo)
+            bookmes.style.backgroundColor = 'gray'
+            usermes.style.backgroundColor = '#c04851'
+            usercontrol.style.backgroundColor ='gray'
+            bookpub.style.backgroundColor ='gray'
+            var div =document.querySelectorAll('div');
+            body.removeChild(div[6]);
+            var usermes1 = document.createElement("div");
+            usermes1.className='message'
+            usermes1.style.width = '65%'
+            usermes1.style.height = '700px'
+            usermes1.style.marginLeft = '25%'
+            usermes1.innerHTML = `
+	   <h2 style='border: 1px solid #ccc'>当前登录用户信息</h2>
+       <h3>当前头像:</h3>
+                <img src=`+headimg111+` style = "height:100px;width:100px" id="headimg11" /><br>
+                <form id="upload" action="/headimg" method="post" style="margin-top:10px;">
+                    <input type="email" name="email" id="email" value = `+'<%-userInfo[0].email%>'+` style = "border: 1px solid #ccc;width:100%;height:50px;display:none" >
+                <input type="file" id="file0" style = "border: 1px solid #ccc;width:15%;height:28px;"><br>
+                <button class='btn2' style = "border:0;width:80px;height:50px;" type="button">更改头像</button>
+            </form>
+       <h3>用户名：</h3> 
+       <input type="text" value = `+userinfo+` style = "border: 1px solid #ccc;width:100%;height:50px;" id='username'>
+       <button style = "border:0;width:80px;height:50px;" class='btn'>更改</button>
+	   <h3>用户邮箱：</h3>
+       <input type="text" value = `+'<%-userInfo[0].email%>'+` style = "border: 1px solid #ccc;width:100%;height:50px;" disabled="disabled">
+       <h3>用户密码:</h3>
+				<input type="password" placeholder="更改密码" value = `+password111+` style = "border: 1px solid #ccc;width:100%;height:50px;" id="password">
+				<button class='btn1' style = "border:0;width:80px;height:50px;">更改</button>
+        
+				`
+            body.appendChild(usermes1);
+            var btn = document.querySelector('.btn')
+	        var btn1 = document.querySelector('.btn1')
+		    var input = document.querySelectorAll('input')
+            var username = document.querySelector('#username')
+            var password = document.querySelector('#password')
+            console.log(input)
+            var btn2 = document.querySelector('.btn2')
+			console.log(input)
+            btn.onclick = function(){
+            let xhr = new XMLHttpRequest();
+            xhr.open('GET','/changename/'+'<%-userInfo[0].email%>'+'/'+username.value+'/'+'<%-userInfo[0].username%>')
+            xhr.send();
+            xhr.onload = function(){
+                username.value=username.value
+                userinfo = username.value
+                alert('更改成功')
+
+            }
+         	}
+	       btn1.onclick = function(){
+            let xhr = new XMLHttpRequest();
+            xhr.open('GET','/changepass/'+'<%-userInfo[0].email%>'+'/'+password.value)
+            xhr.onload = function(){
+                password.value=password.value
+                password111 = password.value
+                alert('更改成功')
+            }
+	       }
+           btn2.onclick = function(){
+            var form = document.querySelector('#upload')
+        let formdata = new FormData(form);
+        var xhr = new XMLHttpRequest();
+        let file = document.querySelector('#file0')
+            formdata.append('headimg',file.files[0])
+        xhr.open('post','/headimg')
+        xhr.send(formdata)
+        xhr.onload= function(){
+            var headimg = document.querySelector('#headimg11')
+            console.log(xhr.responseText)
+            headimg111 = xhr.responseText
+            headimg.src = xhr.responseText
+            alert('更改头像成功')
+           } }
+        }
+            }
+        usercontrol.onclick = function(){
+            bookmes.style.backgroundColor = 'gray'
+            usermes.style.backgroundColor = 'gray'
+            usercontrol.style.backgroundColor ='#c04851'
+            bookpub.style.backgroundColor ='gray'
+            var div =document.querySelectorAll('div');
+            var array = "";
+            body.removeChild(div[6]);
+           let xhr = new XMLHttpRequest();
+           xhr.open('GET','/usermessage')
+           xhr.send();
+           xhr.onload = function(){
+               let result = JSON.parse(xhr.responseText)
+               console.log(result)
+               var usercontrol1 = document.createElement("div");
+            usercontrol1.style.width = '65%'
+            usercontrol1.style.height = '700px'
+            usercontrol1.style.marginLeft = '35%'
+            usercontrol1.style.marginTop ='40px'
+            function resultarr(){
+                for(var i = 0; i < result.length;i++){
+                 array  +=  `<div><span style = "display:inline-block;width:200px;height:80px;border:1px solid gray;text-align:center;line-height:80px">`+result[i].username+`</span><span style = "display:inline-block;width:200px;height:80px;border:1px solid gray;text-align:center;line-height:80px">`+ result[i].email+`</span><span style = "display:inline-block;width:200px;height:80px;border:1px solid gray;text-align:center;line-height:80px">`+result[i].password+`</span><a style = "display:inline-block;width:100px;height:80px;border:1px solid gray;text-align:center;line-height:80px">删除用户</a></div>`
+                }
+            }
+            resultarr()
+            console.log(array)
+            usercontrol1.innerHTML =`<div><span style = "display:inline-block;width:200px;height:80px;border:1px solid gray;text-align:center;line-height:80px">用户名</span><span style = "display:inline-block;width:200px;height:80px;border:1px solid gray;text-align:center;line-height:80px">邮箱</span><span style = "display:inline-block;width:200px;height:80px;border:1px solid gray;text-align:center;line-height:80px">密码</span><span style = "display:inline-block;width:100px;height:80px;border:1px solid gray;text-align:center;line-height:80px">删除操作</span></div>`+ array
+            
+            body.appendChild(usercontrol1);
+            let alist = document.querySelectorAll('a')
+            alist.forEach(function(item,i){
+                item.onclick = function(){
+                    console.log(alist[i].parentNode.children)
+                    let xhr = new XMLHttpRequest();
+                    let email = alist[i].parentNode.children[1].innerText
+                    console.log(email)
+                    xhr.open('GET','/deluser/'+email)
+                    xhr.send();
+                    xhr.onload= function(){
+                        alert(xhr.responseText)
+                    }
+                    usercontrol1.removeChild(alist[i].parentNode)
+                }
+            })
+           }
+        }
+        bookpub.onclick = function(){
+            bookmes.style.backgroundColor = 'gray'
+            usermes.style.backgroundColor = 'gray'
+            usercontrol.style.backgroundColor ='gray'
+            bookpub.style.backgroundColor ='#c04851'
+            var container = document.querySelector('.container')
+            
+            var div =document.querySelectorAll('div');
+            console.log(div)
+            body.removeChild(div[6]);
+            var zhezhao = document.createElement('div')
+            zhezhao.style.width = '65%'
+            zhezhao.style.height = '700px'
+            zhezhao.style.marginLeft = '25%'
+            zhezhao.style.marginTop ='0px'
+	zhezhao.innerHTML = ` 
+	<div class='form'>
+	<form action="/release" method="post" style="margin-top:10px;" id="form">
+     <h3>书籍发布</h3>
+     <h5>发表书籍名</h5>
+	 <input type="text" name="bookname" id="bookname" placeholder="请输入书名" style="border:1px solid #ccc;width:100%;height:50px;outline:none">
+     <h5>封面地址</h5>
+	 <input type="text" name="bookimg" id="bookimg" placeholder="请输入封面地址" style="border:1px solid #ccc;width:100%;height:50px;outline:none" id="file"><br>
+     <button type="button" style="border:1px solid #ccc;outline:none">链接地址</button><button type="button" style="border:0;outline:none">文件上传</button> 
+     <h5>作者名</h5>
+	 <input type="text" name="author" id="author" placeholder="请输入作者名" style="border:1px solid #ccc;width:100%;height:50px;outline:none">
+     <h5>书籍标签</h5>
+	 <input type="text" name="tag" id="tag" placeholder="请输入标签" style="border:1px solid #ccc;width:100%;height:50px;outline:none">
+     <h5>书籍发布时间</h5>
+	 <input type="Date" name="pubtime" id="pubtime" placeholder="请输入发布时间" style="border:1px solid #ccc;width:100%;height:50px;outline:none">
+     <h5>书籍分类</h5>
+     <select name="sort" style="border:1px solid #ccc;width:30%;height:50px;outline:none">
+  <option value="历史传记">历史传记</option>
+  <option value="经济管理">经济管理</option>
+  <option value="小说文学">小说文学</option>
+  <option value="励志成功">励志成功</option>
+  <option value="人文社科">人文社科</option>
+  <option value="生活时尚">生活时尚</option>
+  <option value="学习教育">学习教育</option>
+  <option value="英文原版">英文原版</option>
+</select>
+     <h5>内容简介</h5>
+	 <input type="text" name="brief" id="brief" placeholder="请输入内容简介" style="border:1px solid #ccc;width:100%;height:50px;outline:none">
+     <h5>作者简介</h5>
+	 <input type="text" name="abrief" id="abrief" placeholder="请输入作者简介" style="border:1px solid #ccc;width:100%;height:50px;outline:none">
+     <h5>书籍地址</h5>
+	 <input type="text" name="bookUrl" id="bookUrl" placeholder="请输入书籍地址" style="border:1px solid #ccc;width:100%;height:50px;outline:none">
+     <h5>书籍下载地址</h5>
+	 <input type="text" name="download" id="download" placeholder="请输入下载地址" style="border:1px solid #ccc;width:100%;height:50px;outline:none" id="file1"><br>
+     <button type="button" style="border:1px solid #ccc;outline:none">链接地址</button><button type="button" style="border:0;outline:none">文件上传</button> 
+	 <input type="submit" value="发布" style="border:0;width:100%;height:50px;background-color:#ccc;">
+     
+	</form>
+	<div>`
+	body.appendChild(zhezhao)
+    var submit = document.querySelectorAll('input')
+    var button = document.querySelectorAll('button')
+    console.log(button)
+    var height = document.querySelector('.form')
+    console.log(height.offsetHeight)
+    container.style.height = height.offsetHeight+90+'px'
+    button[0].onclick = function() {
+        button[0].style.border ='1px solid #ccc'
+        button[0].style.outline ='none'
+        submit[1].type='type'
+        button[1].style.border ='0'
+        button[1].style.outline ='none'
+    }
+    button[1].onclick = function() {
+        submit[1].type='file'
+        button[1].style.outline ='none'
+        button[1].style.border ='1px solid #ccc'
+        button[1].style.outline ='none'
+        button[0].style.border ='0'
+        button[0].style.outline ='none'
+    }
+    button[2].onclick = function() {
+        submit[9].type='type'
+        button[2].style.border ='1px solid #ccc'
+        button[2].style.outline ='none'
+        button[3].style.border ='0'
+        button[3].style.outline ='none'
+    }
+    button[3].onclick = function() {
+        submit[9].type='file'
+        button[3].style.outline ='none'
+        button[3].style.border ='1px solid #ccc'
+        button[3].style.outline ='none'
+        button[2].style.border ='0'
+        button[2].style.outline ='none'
+    }
+    submit[submit.length-1].onclick = function(){
+        event.preventDefault();
+        // let xhr = new XMLHttpRequest();
+        // let bookname = submit[0].value;
+        // let bookimg = submit[1].value;
+        // let author = submit[2].value;
+        // let tag = submit[3].value;
+        // let pubtime = submit[4].value;
+        // let sort = submit[5].value;
+        // let brief = submit[6].value;
+        // let abrief = submit[7].value;
+        // let bookUrl = submit[8].value;
+        // let download = submit[9].value;
+        // let params = 'bookname='+bookname+'&bookimg='+bookimg+'&author='+author+'&tag='+tag+'&pubtime='+pubtime+'&sort='+brief+'&abrief='+abrief+'&bookUrl='+bookUrl+'&download='+download;
+        // console.log(params)
+        // xhr.open('POST','/release')
+		// xhr.setRequestHeader('Content-Type','application/x-www-form-urlencoded')
+        // xhr.send(params);
+        // xhr.onload = function(){
+        //     alert(xhr.responseText)
+        //     for(let i=0;i<submit.length;i++){
+        //         submit[i].value=''
+        //     }
+        // }
+        var form = document.querySelector('#form')
+        let formdata = new FormData(form);
+        var xhr = new XMLHttpRequest();
+        let file = document.querySelector('#file')
+        let file1 = document.querySelector('#file1')
+        console.log(file)
+        if(file){
+            formdata.append('bookimg',file.files[0])
+        }
+        if(file1){
+            formdata.append('download',file1.files[0])
+        }
+        xhr.open('post','/upload')
+        xhr.send(formdata)
+        xhr.onload= function(){
+            alert(xhr.responseText)
+        }
+    }
+}
+    </script>
+</body>
+</html>
